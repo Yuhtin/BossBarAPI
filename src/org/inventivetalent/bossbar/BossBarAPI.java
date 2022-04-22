@@ -58,7 +58,7 @@ public class BossBarAPI implements API, Listener {
 	 */
 	public static BossBar addBar(Collection<Player> players, String message, Color color, Style style, float progress, Property... properties) {
 		validate1_9();
-		BossBar bossBar = new PacketBossBar(message, color, style, progress, properties);
+		BossBar bossBar = new BukkitBossBar(message, color, style, progress, properties);
 		for (Player player : players) {
 			addBarForPlayer(player, bossBar);
 		}
@@ -78,7 +78,7 @@ public class BossBarAPI implements API, Listener {
 	 */
 	public static BossBar addBar(Collection<Player> players, BaseComponent component, Color color, Style style, float progress, Property... properties) {
 		validate1_9();
-		BossBar bossBar = new PacketBossBar(component, color, style, progress, properties);
+		BossBar bossBar = new BukkitBossBar(component, color, style, progress, properties);
 		for (Player player : players) {
 			addBarForPlayer(player, bossBar);
 		}
@@ -101,7 +101,7 @@ public class BossBarAPI implements API, Listener {
 	public static BossBar addBar(Collection<Player> players, BaseComponent component, Color color, Style style, float progress, int timeout, long interval, Property... properties) {
 		validate1_9();
 		final BossBar bossBar = addBar(players, component, color, style, progress, properties);
-		new BossBarTimer((PacketBossBar) bossBar, progress, timeout).runTaskTimer(BossBarPlugin.instance, interval, interval);
+		new BossBarTimer((BukkitBossBar) bossBar, progress, timeout).runTaskTimer(BossBarPlugin.instance, interval, interval);
 		return bossBar;
 	}
 
@@ -119,7 +119,7 @@ public class BossBarAPI implements API, Listener {
 	 */
 	public static BossBar addBar(Player player, BaseComponent component, Color color, Style style, float progress, Property... properties) {
 		if (is1_9) {
-			BossBar bossBar = new PacketBossBar(component, color, style, progress, properties);
+			BossBar bossBar = new BukkitBossBar(component, color, style, progress, properties);
 			addBarForPlayer(player, bossBar);
 			return bossBar;
 		} else {
@@ -144,7 +144,7 @@ public class BossBarAPI implements API, Listener {
 	public static BossBar addBar(Player player, BaseComponent component, Color color, Style style, float progress, int timeout, long interval, Property... properties) {
 		if (is1_9) {
 			final BossBar bossBar = addBar(player, component, color, style, progress, properties);
-			new BossBarTimer((PacketBossBar) bossBar, progress, timeout).runTaskTimer(BossBarPlugin.instance, interval, interval);
+			new BossBarTimer((BukkitBossBar) bossBar, progress, timeout).runTaskTimer(BossBarPlugin.instance, interval, interval);
 			return bossBar;
 		} else {
 			setMessage(player, component.toLegacyText(), progress * 100, timeout);
@@ -164,7 +164,7 @@ public class BossBarAPI implements API, Listener {
 	 */
 	public static BossBar addBar(BaseComponent component, Color color, Style style, float progress, Property... properties) {
 		validate1_9();
-		return new PacketBossBar(component, color, style, progress, properties);
+		return new BukkitBossBar(component, color, style, progress, properties);
 	}
 
 	public static Collection<BossBar> getBossBars(Player player) {
