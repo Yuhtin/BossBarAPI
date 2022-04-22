@@ -17,7 +17,6 @@ public class BukkitBossBar implements BossBar {
     private final org.bukkit.boss.BossBar bukkitBossBar;
     private final Collection<Player> receivers = new ArrayList<>();
     private float progress;
-    private String message;
     private BossBarAPI.Color color;
     private BossBarAPI.Style style;
 
