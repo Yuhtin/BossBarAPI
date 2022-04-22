@@ -26,24 +26,16 @@ public class BossBarAPI implements API, Listener {
 
 	protected static final Map<UUID, Collection<BossBar>> barMap = new ConcurrentHashMap<>();
 
-	public static boolean is1_9 = Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1);
+	public static boolean is1_9 = Minecraft.MINECRAFT_VERSION.newerThan(Minecraft.Version.v1_9_R1);
 
 	public enum Color {
-		PINK,
-		BLUE,
-		RED,
-		GREEN,
-		YELLOW,
-		PURPLE,
-		WHITE;
+		PINK, BLUE, RED, GREEN,
+		YELLOW, PURPLE, WHITE
 	}
 
 	public enum Style {
-		PROGRESS,
-		NOTCHED_6,
-		NOTCHED_10,
-		NOTCHED_12,
-		NOTCHED_20;
+		PROGRESS, NOTCHED_6, NOTCHED_10,
+		NOTCHED_12, NOTCHED_20
 	}
 
 	public enum Property {
@@ -186,6 +178,7 @@ public class BossBarAPI implements API, Listener {
 		Collection<BossBar> collection = barMap.get(player.getUniqueId());
 		if (collection == null) { collection = new ArrayList<>(); }
 		collection.add(bossBar);
+
 		barMap.put(player.getUniqueId(), collection);
 	}
 
@@ -267,10 +260,12 @@ public class BossBarAPI implements API, Listener {
 				list.add(new EntityBossBar(player, message, percentage, timeout, minHealth));
 				barMap.put(player.getUniqueId(), list);
 			}
+
 			BossBar bar = ((List<BossBar>) barMap.get(player.getUniqueId())).get(0);
 			if (!bar.getMessage().equals(message)) {
 				bar.setMessage(message);
 			}
+
 			float newHealth = percentage / 100F * bar.getMaxHealth();
 			if (bar.getHealth() != newHealth) {
 				bar.setHealth(percentage);
